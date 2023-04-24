@@ -1,4 +1,6 @@
-package jdbc.starter.util;
+package jdbc.starter;
+
+import jdbc.starter.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
