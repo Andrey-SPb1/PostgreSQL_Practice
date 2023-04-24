@@ -11,10 +11,12 @@ public class TransactionRunner {
 
         long flight_id = 9L;
         String sql_ticket = """ 
-                DELETE FROM ticket WHERE flight_id = ?;
+                DELETE FROM ticket
+                WHERE flight_id = ?;
                 """;
         String sql_flight = """ 
-                DELETE FROM flight WHERE id = ?;
+                DELETE FROM flight
+                WHERE id = ?;
                 """;
 
         Connection connection = null;
