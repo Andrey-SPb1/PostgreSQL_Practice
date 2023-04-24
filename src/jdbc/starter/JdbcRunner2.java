@@ -14,9 +14,39 @@ public class JdbcRunner2 {
 //        List<Long> ticketByFlightId = getTicketByFlightId(value);
 //        System.out.println(ticketByFlightId);
 
-        List<Long> flightsBetween =
-                getFlightsBetween(LocalDate.of(2020,5,12).atStartOfDay(), LocalDateTime.now());
-        System.out.println(flightsBetween);
+//        List<Long> flightsBetween =
+//                getFlightsBetween(LocalDate.of(2020,5,12).atStartOfDay(), LocalDateTime.now());
+//        System.out.println(flightsBetween);
+
+        checkMetaData();
+
+    }
+
+    private static void checkMetaData() throws SQLException {
+
+        try(Connection connection = ConnectionManager.open()) {
+            var metaData = connection.getMetaData();
+            var catalogs = metaData.getCatalogs();
+            while (catalogs.next()) {
+                var catalog = catalogs.getString("TABLE_CAT");
+                var schemas = metaData.getSchemas();
+                while (schemas.next()) {
+                    var schema = schemas.getString("TABLE_SCHEM");
+                    ResultSet tables = metaData.getTables(catalog, schema, "%", new String[] {"TABLE"});
+                    if(schema.equals("public")) {
+                        int num = 0;
+                        while (tables.next()) {
+                            var table = tables.getString("TABLE_NAME");
+                            System.out.println(++num + ")" + table);
+                            var columns = metaData.getColumns(catalog, schema, table, "%");
+                            while (columns.next()) {
+                                System.out.println(columns.getString("COLUMN_NAME"));
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
