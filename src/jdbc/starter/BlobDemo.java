@@ -26,7 +26,7 @@ public class BlobDemo {
                 WHERE id = ?;
                 """;
 
-        try(var connection = ConnectionManager.open();
+        try(var connection = ConnectionManager.get();
         var prepareStatement = connection.prepareStatement(sql)) {
 
             prepareStatement.setInt(1,id);
@@ -45,7 +45,7 @@ public class BlobDemo {
                 WHERE id = 1;
                 """;
 
-        try(var connection = ConnectionManager.open();
+        try(var connection = ConnectionManager.get();
             var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBytes(1,
                     Files.readAllBytes(Path.of("resources", "Boeing.jpg")));

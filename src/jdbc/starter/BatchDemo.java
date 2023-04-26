@@ -18,7 +18,7 @@ public class BatchDemo {
         Statement statement = null;
 
         try {
-            connection = ConnectionManager.open();
+            connection = ConnectionManager.get();
             connection.setAutoCommit(false);
             statement = connection.createStatement();
 
