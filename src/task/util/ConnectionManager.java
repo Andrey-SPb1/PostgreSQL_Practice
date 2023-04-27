@@ -1,16 +1,17 @@
-package jdbc.starter.util;
+package task.util;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public final class ConnectionManager {
 
-    private static final String URL_KEY = "db.url1";
+    private static final String URL_KEY = "db.url2";
     private static final String USER_KEY = "db.username";
     private static final String PASSWORD_KEY = "db.password";
     private static final String POOL_SIZE_KEY = "db.pool.size";

@@ -67,11 +67,10 @@ public class TicketDao implements Dao<Long, Ticket> {
 
         try(var connection = ConnectionManager.get();
             var preparedStatement = connection.prepareStatement(FIND_BY_ID_SQL)) {
-
             preparedStatement.setLong(1, id);
             var resultSet = preparedStatement.executeQuery();
             Ticket ticket = null;
-            while(resultSet.next()) {
+            if(resultSet.next()) {
                 ticket = buildTicket(resultSet);
             }
             return Optional.ofNullable(ticket);
